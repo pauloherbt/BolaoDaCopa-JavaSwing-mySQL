@@ -23,11 +23,11 @@ public class JanelaQuartas extends JFrame {
 		setVisible(true);
 		setSize(500, 300);
 		this.cb= cb;
-		addPerifericos();
+		addLabels();
 		addConfrontos();
 	}
 
-	private void addPerifericos() {
+	private void addLabels() {
 		JLabel label = new JLabel("Quartas de Final");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		add(BorderLayout.NORTH,label);

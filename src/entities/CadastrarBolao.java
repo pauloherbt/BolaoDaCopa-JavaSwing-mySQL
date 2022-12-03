@@ -10,17 +10,21 @@ import javax.swing.JTextField;
 
 import buttons.BPegarNome;
 import gui.JanelaFinal;
+import gui.JanelaGanhador;
 import gui.JanelaQuartas;
 import gui.JanelaSemi;
+import persistencia.ParticipanteDAO;
 
 public class CadastrarBolao {
 	private Participante participante;
+	private ParticipanteDAO partDAO;
 	private ProcessarQuartas quartas;
 	private ProcessarSemi semi;
 	private ProcessarFinal finale;
 	public CadastrarBolao() {
 		participante = new Participante();
 		quartas=new ProcessarQuartas();
+		partDAO = new ParticipanteDAO();
 		run();
 	}
 	
@@ -43,15 +47,27 @@ public class CadastrarBolao {
 		janelinha.add(painel);
 	}
 	public void janelaQuartas() {
+		partDAO.inserir(participante);
 		JanelaQuartas jn=new JanelaQuartas(this);
 	}
 	public void janelaSemi() {
+		participante.setQuartas(quartas.getConfrontos());
+		partDAO.updateQuartas(participante);
 		semi =new ProcessarSemi(quartas);
 		JanelaSemi js= new JanelaSemi(this);
 	}
 	public void janelaFinal() {
+		participante.setSemi(semi.getConfrontos());
+		partDAO.updateSemi(participante);
 		finale= new ProcessarFinal(semi);
 		JanelaFinal jf = new JanelaFinal(this);
+	}
+	public void janelaGanhador() {
+		participante.setFinale(finale.getConfrontos());
+		partDAO.updateFinal(participante);
+		participante.setVencedor(finale.getVencedores().get(0));
+		partDAO.updateVencedor(participante);
+		JanelaGanhador jg= new JanelaGanhador(this);
 	}
 	public Participante getParticipante() {
 		return participante;

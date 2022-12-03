@@ -22,11 +22,11 @@ public class JanelaFinal extends JFrame {
 		setVisible(true);
 		setSize(500, 300);
 		this.cb = cb;
-		addPerifericos();
-		addComponents();
+		addLabels();
+		addConfrontos();
 	}
 
-	private void addComponents() {
+	private void addConfrontos() {
 		JPanel panel = new JPanel();
 		for (PainelConfrontos painel : cb.getFinale().getConfrontos()) {
 			panel.add(painel);
@@ -34,7 +34,7 @@ public class JanelaFinal extends JFrame {
 		add(BorderLayout.CENTER, panel);
 	}
 
-	private void addPerifericos() {
+	private void addLabels() {
 		JLabel label = new JLabel("FINAL");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		add(BorderLayout.NORTH, label);

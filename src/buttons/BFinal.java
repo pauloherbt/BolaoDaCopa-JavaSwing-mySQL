@@ -6,6 +6,7 @@ import entities.CadastrarBolao;
 import gui.JanelaFinal;
 
 public class BFinal extends Botao {
+	private static final long serialVersionUID = 1L;
 	private CadastrarBolao cb;
 	private JanelaFinal janela;
 	public BFinal(JanelaFinal janela,CadastrarBolao cb) {
@@ -19,6 +20,7 @@ public class BFinal extends Botao {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		janela.setVisible(false);
+		cb.janelaGanhador();
 	}
 
 }

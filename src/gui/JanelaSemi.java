@@ -22,11 +22,11 @@ public class JanelaSemi extends JFrame {
 		setVisible(true);
 		setSize(500, 300);
 		this.cb = cb;
-		addPerifericos();
-		addComponents();
+		addLabels();
+		addConfrontos();
 	}
 
-	private void addPerifericos() {
+	private void addLabels() {
 		JLabel label = new JLabel("Semifinais");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		add(BorderLayout.NORTH, label);
@@ -34,7 +34,7 @@ public class JanelaSemi extends JFrame {
 		add(BorderLayout.SOUTH, botao);
 	}
 
-	private void addComponents() {
+	private void addConfrontos() {
 		JPanel panel = new JPanel();
 		for (PainelConfrontos confronto : cb.getSemi().getConfrontos()) {
 			panel.add(confronto);
