@@ -2,13 +2,41 @@ package persistencia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entities.Participante;
+import entities.ParticipanteDados;
 import gui.PainelConfrontos;
 
 public class ParticipanteDAO {
 
+	
+	public ArrayList<Participante> listarTudo() {
+		ArrayList<Participante> parts= new ArrayList<>();
+		try(Connection conexao = new Conexao().getConexao()){
+			ResultSet res= conexao.prepareStatement("select * from tab_bolao").executeQuery();
+			while(res.next()) {
+				Participante part= new Participante();
+				part.setNome(res.getString(2));
+				int i=3;
+				while(i<=30) {
+					part.addSelecoes(res.getString(i));
+					i++;
+					part.addPlacares(res.getInt(i));
+					i++;
+				}
+				part.setVencedor(res.getString(31));
+				parts.add(part);
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return parts;
+	}
+	
 	public void inserir(Participante p) {
 		try (Connection conexao = new Conexao().getConexao()) {
 			PreparedStatement statement = conexao.prepareStatement("insert into tab_bolao (nome) values (?)");
@@ -73,5 +101,71 @@ public class ParticipanteDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public ArrayList<ParticipanteDados> listar() {
+		ArrayList<ParticipanteDados> part = new ArrayList<>();
+		try (Connection conexao = new Conexao().getConexao()) {
+			ResultSet result = conexao.prepareStatement("select * from tab_bolao").executeQuery();
+			ParticipanteDados parti;
+			while (result.next()) {
+				parti = new ParticipanteDados();
+				String quartas = organizarQuartas(result);
+				String semi = organizarSemi(result);
+				String finale = organizarFinal(result);
+				parti.setNome(result.getString("nome"));
+				parti.setQuartas(quartas);
+				parti.setSemi(semi);
+				parti.setFinale(finale);
+				parti.setWinner(result.getString("VENCEDOR"));
+				part.add(parti);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return part;
+	}
+
+	private String organizarFinal(ResultSet result) {
+		String confronto = "%s %d X %s %d\n";
+		try {
+			return String.format(confronto, result.getString("FS1"), result.getInt("FP1"), result.getString("FS2"),
+					result.getInt("FP2"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private String organizarSemi(ResultSet result) {
+		String confronto = "%s %d X %s %d\n";
+		String semi = null;
+		try {
+			semi = String.format(confronto, result.getString("SS1"), result.getInt("SP1"), result.getString("SS2"),
+					result.getInt("SP2"));
+			semi += String.format(confronto, result.getString("SS3"), result.getInt("SP3"), result.getString("SS4"),
+					result.getInt("SP4"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return semi;
+	}
+
+	private String organizarQuartas(ResultSet result) {
+		String confronto = " %s %d X %s %d\n";
+		String quartas = null;
+		try {
+			quartas = String.format(confronto, result.getString("QS1"), result.getInt("QP1"), result.getString("QS2"),
+					result.getInt("QP2"));
+			quartas += String.format(confronto, result.getString("QS3"), result.getInt("QP3"), result.getString("QS4"),
+					result.getInt("QP4"));
+			quartas += String.format(confronto, result.getString("QS5"), result.getInt("QP5"), result.getString("QS6"),
+					result.getInt("QP6"));
+			quartas += String.format(confronto, result.getString("QS7"), result.getInt("QP7"), result.getString("QS8"),
+					result.getInt("QP8"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quartas;
 	}
 }

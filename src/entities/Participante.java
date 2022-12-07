@@ -9,9 +9,12 @@ public class Participante {
 	private ArrayList<PainelConfrontos> quartas;
 	private ArrayList<PainelConfrontos> semi;
 	private ArrayList<PainelConfrontos> finale;
+	private ArrayList<String> selecoes;
+	private ArrayList<Integer> placares;
 	private String vencedor;
 	public Participante() {
-		//this.quartas = new ArrayList<>();
+		selecoes= new ArrayList<>();
+		placares= new ArrayList<>();
 	}
 
 	public String getNome() {
@@ -68,6 +71,22 @@ public class Participante {
 
 	public void setVencedor(String vencedor) {
 		this.vencedor = vencedor;
+	}
+
+	public ArrayList<String> getSelecoes() {
+		return selecoes;
+	}
+
+	public void addSelecoes(String selecoes) {
+		this.selecoes.add(selecoes);
+	}
+
+	public ArrayList<Integer> getPlacares() {
+		return placares;
+	}
+
+	public void addPlacares(int i) {
+		placares.add(i);
 	}
 
 }
