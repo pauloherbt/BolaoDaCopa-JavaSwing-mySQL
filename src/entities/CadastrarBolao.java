@@ -47,23 +47,23 @@ public class CadastrarBolao {
 		janelinha.add(painel);
 	}
 	public void janelaQuartas() {
-		partDAO.inserir(participante);
+		partDAO.inserirNome(participante);
 		JanelaQuartas jn=new JanelaQuartas(this);
 	}
 	public void janelaSemi() {
-		participante.setQuartas(quartas.getConfrontos());
+		participante.confrontosQuartas(quartas.getConfrontos());
 		partDAO.updateQuartas(participante);
 		semi =new ProcessarSemi(quartas);
 		JanelaSemi js= new JanelaSemi(this);
 	}
 	public void janelaFinal() {
-		participante.setSemi(semi.getConfrontos());
+		participante.confrontosSemi(semi.getConfrontos());
 		partDAO.updateSemi(participante);
 		finale= new ProcessarFinal(semi);
 		JanelaFinal jf = new JanelaFinal(this);
 	}
 	public void janelaGanhador() {
-		participante.setFinale(finale.getConfrontos());
+		participante.confrontosFinal(finale.getConfrontos());
 		partDAO.updateFinal(participante);
 		participante.setVencedor(finale.getVencedores().get(0));
 		partDAO.updateVencedor(participante);

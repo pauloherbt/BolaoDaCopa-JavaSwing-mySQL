@@ -2,6 +2,8 @@ package buttons;
 
 import java.awt.event.ActionEvent;
 
+import entities.ImportarBolao;
+
 public class BImportarBoloes extends Botao {
 	private static final long serialVersionUID = 1L;
 	
@@ -14,6 +16,7 @@ public class BImportarBoloes extends Botao {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("Importar Boloes");
+		ImportarBolao importar= new ImportarBolao();
 	}
 
 }

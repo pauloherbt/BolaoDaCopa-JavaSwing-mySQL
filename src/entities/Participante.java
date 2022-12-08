@@ -6,15 +6,19 @@ import gui.PainelConfrontos;
 
 public class Participante {
 	private String nome;
-	private ArrayList<PainelConfrontos> quartas;
-	private ArrayList<PainelConfrontos> semi;
-	private ArrayList<PainelConfrontos> finale;
+	private ArrayList<Confronto> quartas;
+	private ArrayList<Confronto> semi;
+	private ArrayList<Confronto> finale;
 	private ArrayList<String> selecoes;
 	private ArrayList<Integer> placares;
 	private String vencedor;
+
 	public Participante() {
-		selecoes= new ArrayList<>();
-		placares= new ArrayList<>();
+		selecoes = new ArrayList<>();
+		placares = new ArrayList<>();
+		quartas = new ArrayList<>();
+		semi = new ArrayList<>();
+		finale = new ArrayList<>();
 	}
 
 	public String getNome() {
@@ -25,44 +29,44 @@ public class Participante {
 		this.nome = nome;
 	}
 
-	public ArrayList<PainelConfrontos> getQuartas() {
+	public ArrayList<Confronto> getQuartas() {
 		return quartas;
 	}
-	
-	public ArrayList<String> nomes(ArrayList<PainelConfrontos> confrontos){
-		ArrayList<String> nomes = new ArrayList<>();
-		for (PainelConfrontos painelConfrontos : confrontos) {
-			nomes.add(painelConfrontos.getS1().getText());
-			nomes.add(painelConfrontos.getS2().getText());
-		}
-		return nomes;
+
+	public void confrontosQuartas(ArrayList<PainelConfrontos> confrontos) {
+		confrontos(quartas, confrontos);
 	}
-	public ArrayList<Integer> placar(ArrayList<PainelConfrontos> confrontos){
-		ArrayList<Integer> placar = new ArrayList<>();
-		for (PainelConfrontos painelConfrontos : confrontos) {
-			placar.add(Integer.parseInt(painelConfrontos.getP1().getText()));
-			placar.add(Integer.parseInt(painelConfrontos.getP2().getText()));
-		}
-		return placar;
+
+	public void confrontosSemi(ArrayList<PainelConfrontos> confrontos) {
+		confrontos(semi, confrontos);
 	}
-	public ArrayList<PainelConfrontos> getSemi() {
+
+	public void confrontosFinal(ArrayList<PainelConfrontos> confrontos) {
+		confrontos(finale, confrontos);
+	}
+
+	private void confrontos(ArrayList<Confronto> fase, ArrayList<PainelConfrontos> confrontos) {
+		for (PainelConfrontos painelConfrontos : confrontos) {
+			fase.add(new Confronto(painelConfrontos.getS1().getText(), painelConfrontos.getS2().getText(),
+					Integer.parseInt(painelConfrontos.getP1().getText()),
+					Integer.parseInt(painelConfrontos.getP2().getText())));
+		}
+	}
+
+	public ArrayList<Confronto> totalConfrontos() {
+		ArrayList<Confronto> times = new ArrayList<>(quartas);
+		times.addAll(semi);
+		times.addAll(finale);
+		return times;
+
+	}
+
+	public ArrayList<Confronto> getSemi() {
 		return semi;
 	}
 
-	public void setSemi(ArrayList<PainelConfrontos> semi) {
-		this.semi = semi;
-	}
-
-	public ArrayList<PainelConfrontos> getFinale() {
+	public ArrayList<Confronto> getFinale() {
 		return finale;
-	}
-
-	public void setFinale(ArrayList<PainelConfrontos> finale) {
-		this.finale = finale;
-	}
-
-	public void setQuartas(ArrayList<PainelConfrontos> quartas) {
-		this.quartas = quartas;
 	}
 
 	public String getVencedor() {
@@ -87,6 +91,22 @@ public class Participante {
 
 	public void addPlacares(int i) {
 		placares.add(i);
+	}
+
+	public void setQuartas(ArrayList<Confronto> quartas) {
+		this.quartas = quartas;
+	}
+
+	public void addQuartas(Confronto conf) {
+		this.quartas.add(conf);
+	}
+
+	public void setSemi(ArrayList<Confronto> semi) {
+		this.semi = semi;
+	}
+
+	public void setFinale(ArrayList<Confronto> finale) {
+		this.finale = finale;
 	}
 
 }

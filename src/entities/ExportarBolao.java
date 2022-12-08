@@ -19,28 +19,33 @@ public class ExportarBolao {
 		File path = new File("C:\\Users\\paulo\\eclipse-workspace\\Bolao");
 		File arq= new File(path,".txt");
 		try {
+			escreverArquivo(arq);
 			arq.createNewFile();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		ArrayList<Participante> part = partDAO.listarTudo();
+		
+	}
+	private void escreverArquivo(File arq) {
+		ArrayList<Participante> part = partDAO.listar();
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(arq));
 			for (Participante parti : part) {
 				bw.write(parti.getNome()+";");
-				for(int i=0;i<14;i++) {
-					bw.write(parti.getSelecoes().get(i)+";");
-					bw.write(parti.getPlacares().get(i)+";");
+				for (Confronto conf : parti.totalConfrontos()) {
+					bw.write(conf.getSelecao1()+";");
+					bw.write(conf.getPlacar1()+";");
+					bw.write(conf.getSelecao2()+";");
+					bw.write(conf.getPlacar2()+";");
 				}
 				bw.write(parti.getVencedor());
 				bw.newLine();
 			}
 			bw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		
 	}
 	
 }
