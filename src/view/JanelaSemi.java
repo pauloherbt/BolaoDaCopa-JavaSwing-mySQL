@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.awt.BorderLayout;
 
@@ -7,15 +7,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import buttons.BFinal;
+import buttons.BSemifinal;
 import entities.CadastrarBolao;
 
-public class JanelaFinal extends JFrame {
+public class JanelaSemi extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private CadastrarBolao cb;
 
-	public JanelaFinal(CadastrarBolao cb) {
-		setTitle("Final");
+	public JanelaSemi(CadastrarBolao cb) {
+		setTitle("Semifinais");
 		setLayout(new BorderLayout());
 		setLocation(500, 100);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -26,19 +26,19 @@ public class JanelaFinal extends JFrame {
 		addConfrontos();
 	}
 
-	private void addConfrontos() {
-		JPanel panel = new JPanel();
-		for (PainelConfrontos painel : cb.getFinale().getConfrontos()) {
-			panel.add(painel);
-		}
-		add(BorderLayout.CENTER, panel);
-	}
-
 	private void addLabels() {
-		JLabel label = new JLabel("FINAL");
+		JLabel label = new JLabel("Semifinais");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		add(BorderLayout.NORTH, label);
-		BFinal botao = new BFinal(this, cb);
+		BSemifinal botao = new BSemifinal(this, cb);
 		add(BorderLayout.SOUTH, botao);
+	}
+
+	private void addConfrontos() {
+		JPanel panel = new JPanel();
+		for (PainelConfrontos confronto : cb.getSemi().getConfrontos()) {
+			panel.add(confronto);
+		}
+		add(panel);
 	}
 }

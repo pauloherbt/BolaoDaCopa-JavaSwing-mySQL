@@ -14,8 +14,6 @@ public class BImportarBoloes extends Botao {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("Importar Boloes");
 		ImportarBolao importar= new ImportarBolao();
 	}
 

@@ -2,7 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 
-import gui.PainelConfrontos;
+import view.PainelConfrontos;
 
 public class ProcessarQuartas {
 	private ArrayList<PainelConfrontos> confrontos;

@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import entities.Confronto;
 import entities.Participante;
-import entities.ParticipanteDados;
-import gui.PainelConfrontos;
 
 public class ParticipanteDAO {
 

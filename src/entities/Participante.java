@@ -2,7 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 
-import gui.PainelConfrontos;
+import view.PainelConfrontos;
 
 public class Participante {
 	private String nome;
@@ -97,9 +97,7 @@ public class Participante {
 		this.quartas = quartas;
 	}
 
-	public void addQuartas(Confronto conf) {
-		this.quartas.add(conf);
-	}
+	
 
 	public void setSemi(ArrayList<Confronto> semi) {
 		this.semi = semi;

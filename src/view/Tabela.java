@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -11,8 +11,6 @@ import javax.swing.JTable;
 
 import entities.Confronto;
 import entities.Participante;
-import entities.ParticipanteDados;
-import model.ModeloTabela;
 import persistencia.ParticipanteDAO;
 
 public class Tabela extends JFrame {
@@ -23,7 +21,7 @@ public class Tabela extends JFrame {
 		setSize(new Dimension(700, 500));
 		setLocationRelativeTo(null);
 		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		addTabela();
 	}
 

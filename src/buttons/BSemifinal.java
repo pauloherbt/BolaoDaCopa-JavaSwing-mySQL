@@ -3,7 +3,7 @@ package buttons;
 import java.awt.event.ActionEvent;
 
 import entities.CadastrarBolao;
-import gui.JanelaSemi;
+import view.JanelaSemi;
 
 public class BSemifinal extends Botao {
 	private CadastrarBolao cb;

@@ -1,19 +1,24 @@
-package gui;
+package view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import buttons.BVoltar;
 import entities.CadastrarBolao;
 
 public class JanelaGanhador extends JFrame {
 	private static final long serialVersionUID = 1L;
-	CadastrarBolao cb;
+	private CadastrarBolao cb;
+	private JanelaPrincipal jprincipal;
 
-	public JanelaGanhador(CadastrarBolao cb) {
+	public JanelaGanhador(JanelaPrincipal jprincipal,CadastrarBolao cb) {
 		setTitle("Ganhador");
 		setLayout(new BorderLayout());
 		setLocation(500, 100);
@@ -21,8 +26,10 @@ public class JanelaGanhador extends JFrame {
 		setVisible(true);
 		setSize(500, 300);
 		this.cb = cb;
+		this.jprincipal=jprincipal;
 		labelSuperior();
 		labelCentral();
+		addBotao();
 	}
 
 	private void labelSuperior() {
@@ -35,11 +42,16 @@ public class JanelaGanhador extends JFrame {
 		JLabel label = new JLabel();
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		ImageIcon img =verificarGanhador();
+		if(img!=null)
 		img.setImage(img.getImage().getScaledInstance(250, 150, 100));
 		label.setIcon(img);
 		add(BorderLayout.CENTER,label);
 	}
-
+	private void addBotao() {
+		BVoltar botao = new BVoltar(jprincipal, this);
+		botao.setText("VOLTAR");
+		add(BorderLayout.SOUTH,botao);
+	}
 	private ImageIcon verificarGanhador() {
 		String winner = cb.getParticipante().getVencedor();
 		

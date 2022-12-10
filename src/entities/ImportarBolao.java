@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -33,6 +34,7 @@ public class ImportarBolao {
 			partDAO.updateFinal(part);
 			partDAO.updateVencedor(part);
 		}
+		JOptionPane.showInternalMessageDialog(null, "Arquivo importado com sucesso");
 	}
 	private ArrayList<Participante> lerArquivo(File file){
 		ArrayList<Participante> parts= new ArrayList<>();

@@ -3,7 +3,8 @@ package buttons;
 import java.awt.event.ActionEvent;
 
 import entities.CadastrarBolao;
-import gui.JanelaFinal;
+import view.JanelaFinal;
+import view.JanelaPrincipal;
 
 public class BFinal extends Botao {
 	private static final long serialVersionUID = 1L;

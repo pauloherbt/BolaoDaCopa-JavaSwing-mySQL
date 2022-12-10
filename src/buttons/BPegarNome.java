@@ -26,7 +26,6 @@ public class BPegarNome extends Botao {
 	public void actionPerformed(ActionEvent e) {
 		String nome = text.getText();
 		cb.getParticipante().setNome(nome);
-		System.out.println(cb.getParticipante().getNome());
 		janela.setVisible(false);
 		cb.janelaQuartas();
 		

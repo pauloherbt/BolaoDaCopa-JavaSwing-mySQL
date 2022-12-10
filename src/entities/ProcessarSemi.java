@@ -2,7 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 
-import gui.PainelConfrontos;
+import view.PainelConfrontos;
 
 public class ProcessarSemi{
 	private ArrayList<PainelConfrontos> confrontos;

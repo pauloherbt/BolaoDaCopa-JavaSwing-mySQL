@@ -3,7 +3,7 @@ package buttons;
 import java.awt.event.ActionEvent;
 
 import entities.CadastrarBolao;
-import gui.JanelaPrincipal;
+import view.JanelaPrincipal;
 
 public class BCadastrarBolao extends Botao{
 	private static final long serialVersionUID = 1L;
@@ -16,9 +16,8 @@ public class BCadastrarBolao extends Botao{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("cadastrar");
 		janela.setVisible(false);
-		CadastrarBolao cadastro = new CadastrarBolao();
+		CadastrarBolao cadastro = new CadastrarBolao(janela);
 	}
 
 }

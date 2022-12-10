@@ -9,11 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import buttons.BPegarNome;
-import gui.JanelaFinal;
-import gui.JanelaGanhador;
-import gui.JanelaQuartas;
-import gui.JanelaSemi;
 import persistencia.ParticipanteDAO;
+import view.JanelaFinal;
+import view.JanelaGanhador;
+import view.JanelaPrincipal;
+import view.JanelaQuartas;
+import view.JanelaSemi;
 
 public class CadastrarBolao {
 	private Participante participante;
@@ -21,10 +22,13 @@ public class CadastrarBolao {
 	private ProcessarQuartas quartas;
 	private ProcessarSemi semi;
 	private ProcessarFinal finale;
-	public CadastrarBolao() {
+	private JanelaPrincipal jprincipal;
+	
+	public CadastrarBolao(JanelaPrincipal jprincipal) {
 		participante = new Participante();
 		quartas=new ProcessarQuartas();
 		partDAO = new ParticipanteDAO();
+		this.jprincipal=jprincipal;
 		run();
 	}
 	
@@ -64,10 +68,10 @@ public class CadastrarBolao {
 	}
 	public void janelaGanhador() {
 		participante.confrontosFinal(finale.getConfrontos());
-		partDAO.updateFinal(participante);
 		participante.setVencedor(finale.getVencedores().get(0));
+		partDAO.updateFinal(participante);
 		partDAO.updateVencedor(participante);
-		JanelaGanhador jg= new JanelaGanhador(this);
+		JanelaGanhador jg= new JanelaGanhador(jprincipal,this);
 	}
 	public Participante getParticipante() {
 		return participante;
